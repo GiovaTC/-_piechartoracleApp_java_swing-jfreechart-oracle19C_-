@@ -5,6 +5,8 @@
 
 <img width="2553" height="1079" alt="image" src="https://github.com/user-attachments/assets/58c2fbe4-dac9-4d48-9d57-1668fe7225a9" />    
 
+<img width="2550" height="1078" alt="image" src="https://github.com/user-attachments/assets/4544eb3f-18aa-4e89-9ed3-52a435c956ea" />    
+
 Programa completo en **Java (Swing)** que genera un **gráfico tipo Excel
 (pie chart)** y guarda los valores en una **base de datos Oracle 19c** .
 
