@@ -85,19 +85,27 @@ public class PieChartOracleApp extends JFrame {
             JOptionPane.showMessageDialog(this, "Error al generar grafico: " + ex.getMessage());
         }
     }
-    
+
     private void guardarOracle() {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+
+            String sql = "INSERT INTO CHART_DATA (VALUE1, VALUE2, VALUE3) VALUES (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setDouble(1, Double.parseDouble(txtV1.getText()));
+            ps.setDouble(2, Double.parseDouble(txtV2.getText()));
+            ps.setDouble(3, Double.parseDouble(txtV3.getText()));
+
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Datos guardados en Oracle correctamente.");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error Oracle: " + ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        SwingUtilities.invokeLater(() -> new PieChartOracleApp().setVisible(true));
     }
 }
