@@ -59,10 +59,34 @@ public class PieChartOracleApp extends JFrame {
         btnGuardar.addActionListener(e -> guardarOracle());
     }
 
-    private void guardarOracle() {
-    }
-
     private void generarGrafico() {
+        try {
+            double v1 = Double.parseDouble(txtV1.getText());
+            double v2 = Double.parseDouble(txtV2.getText());
+            double v3 = Double.parseDouble(txtV3.getText());
+
+            DefaultPieDataset dataset = new DefaultPieDataset();
+            dataset.setValue("Tema A (30%)", v1);
+            dataset.setValue("Tema B (40%)", v2);
+            dataset.setValue("Tema C (30%)", v3);
+
+            JFreeChart chart = ChartFactory.createPieChart(
+                    "Distribucion de porcentajes (Tipo Excel)",
+                    dataset,
+                    true,
+                    true,
+                    false
+            );
+
+            chartContainer.removeAll();
+            chartContainer.add(new ChartPanel(chart));
+            chartContainer.validate();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al generar grafico: " + ex.getMessage());
+        }
+    }
+    
+    private void guardarOracle() {
     }
 
     public static void main(String[] args) {
